@@ -1,5 +1,5 @@
 #!/bin/bash
-# by Beam OP <git[at]bmop.me>
+# by Beam OP <beamop[at]pm.me>
 
 green="\033[0;92m"
 nocolor="\033[0m"
