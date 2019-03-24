@@ -3,7 +3,7 @@
 
 green="\033[0;92m"
 apiKey="" # get yours at https://api.nasa.gov
-apiUrl="https://api.nasa.gov/planetary/apod?api_key=$apiKey"
+apiUrl="https://api.nasa.gov/planetary/apod?api_key=${apiKey}"
 getUrl=$(curl -s "${apiUrl}" | jq '.hdurl')
 
 checkConnection() {
@@ -17,12 +17,21 @@ checkConnection() {
 showAPOD() {
     if [ "$checkConnection" == 0 ]; then
         clear
-        echo "${green}[apodfetch] Not connected to Internet ☹"
+        echo -e "${green}[apodfetch] Not connected to Internet ☹"
         exit 1
     elif [ "$checkConnection" == 1 ]; then
-        clear
-        tiv -h 60 -w 60 "${getUrl:1:-1}"
-        exit 1
+        if [ "$getUrl" == null ]; then
+            clear
+            getUrl=$(curl -s "${apiUrl}" | jq '.url')
+            videoId="${getUrl#*/embed/}"
+            videoThumbnailUrl="https://images.weserv.nl/?url=https://i3.ytimg.com/vi/${videoId:0:-7}/maxresdefault.jpg"
+            tiv -h 60 -w 60 "${videoThumbnailUrl}"
+            exit 1
+        else
+            clear
+            tiv -h 60 -w 60 "${getUrl}"
+            exit 1
+        fi
     fi
 }
 
