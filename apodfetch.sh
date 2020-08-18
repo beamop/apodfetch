@@ -1,5 +1,4 @@
 #!/bin/bash
-# by Beam OP <beamop[at]pm.me>
 
 green="\033[0;92m"
 apiKey="" # get yours at https://api.nasa.gov
