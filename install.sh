@@ -1,5 +1,4 @@
 #!/bin/bash
-# by Beam OP <beamop[at]pm.me>
 
 green="\033[0;92m"
 nocolor="\033[0m"
@@ -8,7 +7,7 @@ dir=${PWD}
 echo -e "${green}[apodfetch] The script will install all dependencies, please wait...${nocolor}"
 
 cd /tmp
-sudo apt install imagemagick jq
+sudo apt install imagemagick jq build-essential make curl
 git clone https://github.com/stefanhaustein/TerminalImageViewer.git
 cd TerminalImageViewer/src/main/cpp/
 make
